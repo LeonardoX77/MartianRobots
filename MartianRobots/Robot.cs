@@ -40,8 +40,6 @@ namespace MartianRobots
                     case Command.Left:
                         RotateCounterclockwise();
                         break;
-                    default:
-                        throw new ArgumentException($"Command {command} not valid");
                 }
             }
         }

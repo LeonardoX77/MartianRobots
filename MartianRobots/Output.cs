@@ -25,19 +25,24 @@ namespace MartianRobots
 
         private static char GetOrientation(Orientation orientation)
         {
+            char result = ' ';
             switch(orientation)
             {
                 case Orientation.North:
-                    return 'N';
+                    result = 'N';
+                    break;
                 case Orientation.South:
-                    return 'S';
+                    result = 'S';
+                    break;
                 case Orientation.East:
-                    return 'E';
+                    result = 'E';
+                    break;
                 case Orientation.West:
-                    return 'W';
-                default:
-                    throw new ArgumentException($"orientation {orientation} not valid");
+                    result = 'W';
+                    break;
             }
+
+            return result;
         }
     }
 }

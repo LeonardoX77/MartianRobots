@@ -99,9 +99,9 @@ namespace MartianRobotsTests
             var savedRobot = new Robot(5, 3, Orientation.North, grid);
 
             //act
-            // this robot should be lost
+            // robot should be lost
             lostRobot.ExecuteCommand(Command.Forward);
-            // This robot should be able to detect the previous robot scent and stop (avoiding to be lost)
+            // robot should be able to detect the previous robot scent and stop (avoiding to be lost)
             savedRobot.ExecuteCommand(Command.Forward);
 
             //assert

@@ -1,38 +1,31 @@
-﻿using System;
+﻿using MartianRobots;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
-using NUnit.CompareNetObjects;
-using MartianRobots;
 
 namespace MartianRobotsTests
 {
     [TestFixture]
     class InputOutputTests
     {
-        private string input;
-        private string output;
-
         [SetUp]
         public void GlobalSetup()
         {
-            input = "5 3\r\n1 1 E\r\nRFRFRFRF\r\n3 2 N\r\nFRRFLLFFRRFLL\r\n0 3 W\r\nLLFFFRFLFL";
-            output = "1 1 E\r\n3 3 N LOST\r\n4 2 N";
         }
 
         [Test]
         public void Test_GetRobotOutput()
         {
             //arrange
-            var robots = new List<Robot> { MockData.GetRobot() };
+            var input = $"5 3\r\n1 1 N\r\n\r\n3 2 E\r\n\r\n2 2 S\r\n\r\n3 3 W\r\n";
 
             //act
+            List<Robot> robots = Input.GetRobots(input);
             var robotReport = Output.GetRobotOutput(robots);
 
             //assert
-            Assert.AreEqual("3 2 N" + Environment.NewLine, robotReport);
+            Assert.AreEqual("1 1 N\r\n3 2 E\r\n2 2 S\r\n3 3 W\r\n", robotReport);
         }
 
         [Test]
@@ -43,7 +36,7 @@ namespace MartianRobotsTests
             var commandStation = new CommandStation(robots);
 
             //act
-            commandStation.TransmitCommandSequence(0);
+            commandStation.ExecuteCommandSequence(0);
             var robotReport = Output.GetRobotOutput(robots);
 
             //assert
@@ -55,19 +48,39 @@ namespace MartianRobotsTests
         {
             //arrange
             var grid = new Grid(5, 3);
-            input = $"5 3\r\n1 1 E\r\n\r\n3 2 N\r\n";
+            var input = $"5 3\r\n1 1 N\r\n\r\n3 2 E\r\n\r\n2 2 S\r\n\r\n3 3 W\r\n";
 
             var expectedRobots = new List<Robot>() {
-                new Robot(1, 1, Orientation.East, grid, new List<Command>()),
-                new Robot(3, 2, Orientation.North, grid, new List<Command>()),
+                new Robot(1, 1, Orientation.North, grid, new List<Command>()),
+                new Robot(3, 2, Orientation.East, grid, new List<Command>()),
+                new Robot(2, 2, Orientation.South, grid, new List<Command>()),
+                new Robot(3, 3, Orientation.West, grid, new List<Command>()),
             };
 
             //act
-            List<Robot> actualRobots;
-            actualRobots = Input.GetRobots(input);
+            List<Robot> actualRobots = Input.GetRobots(input);
 
             //assert
-            Assert.That(actualRobots, IsDeeplyEqual.To(expectedRobots));
+            for (int i = 0; i < expectedRobots.Count; i++)
+            {
+                var expectedRobot = expectedRobots[i];
+                var actualRobot = actualRobots[i];
+                AssertEx.PropertyValuesAreEquals(actualRobot, expectedRobot);
+            }
+        }
+
+        [Test]
+        public void Test_InputGetRobotsWithInvalidOrientationRaiseError()
+        {
+            //arrange
+            var grid = new Grid(5, 3);
+            var input = $"5 3\r\n1 1 X\r\n";
+
+            //act
+
+            //assert
+            var exception = Assert.Throws<ArgumentException>(() => Input.GetRobots(input));
+            Assert.AreEqual("Orientation X not valid", exception?.Message);
         }
 
         [Test]
@@ -75,7 +88,7 @@ namespace MartianRobotsTests
         {
             //arrange
             var grid = new Grid(5, 3);
-            input = $"5 3\r\n1 1 E\r\n{MockData.GetCommandSequenceString()}\r\n3 2 N\r\n{MockData.GetCommandSequenceString()}";
+            var input = $"5 3\r\n1 1 E\r\n{MockData.GetCommandSequenceString()}\r\n3 2 N\r\n{MockData.GetCommandSequenceString()}";
 
             var expectedRobots = new List<Robot>() {
                 new Robot(1, 1, Orientation.East, grid, MockData.GetCommandSequence()),
@@ -83,13 +96,32 @@ namespace MartianRobotsTests
             };
 
             //act
-            List<Robot> actualRobots;
-            actualRobots = Input.GetRobots(input);
+            List<Robot> actualRobots = Input.GetRobots(input);
 
             //assert
-            Assert.That(
-                actualRobots.SelectMany(r => r.Sequences).ToArray(), 
-                IsDeeplyEqual.To(expectedRobots.SelectMany(r => r.Sequences).ToArray()));
+            Command[] actualSequences = actualRobots.SelectMany(r => r.Sequences).ToArray();
+            Command[] expectedSequences = expectedRobots.SelectMany(r => r.Sequences).ToArray();
+            for (int i = 0; i < expectedSequences.Length; i++)
+            {
+                var expectedSequence = expectedSequences[i];
+                var actualSequence = actualSequences[i];
+
+                Assert.AreEqual(actualSequence, expectedSequence);
+            }
+        }
+
+        [Test]
+        public void Test_InputGetRobotsWithInvalidCommandSequenceRaiseError()
+        {
+            //arrange
+            var invalidCommandSequence = "ABCDE";
+            var input = $"5 3\r\n1 1 E\r\n{invalidCommandSequence}";
+
+            //act
+
+            //assert
+            var exception = Assert.Throws<ArgumentException>(() => Input.GetRobots(input));
+            Assert.AreEqual("char A not valid", exception?.Message);
         }
     }
 }

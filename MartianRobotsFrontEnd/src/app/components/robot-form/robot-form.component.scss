@@ -1,0 +1,42 @@
+form {
+  max-width: 500px;
+}
+
+button {
+  margin-top: 10px;
+  width: 150px;
+}
+
+label {
+  margin-top: 10px;
+}
+
+.frame {
+  display: block;
+  margin-inline-start: 2px;
+  margin-inline-end: 2px;
+  padding-block-start: 0.35em;
+  padding-inline-start: 0.75em;
+  padding-inline-end: 0.75em;
+  padding-block-end: 0.625em;
+  min-inline-size: min-content;
+  border-width: 2px;
+  border-style: groove;
+  border-color: #dee2e6;
+  border-image: initial;
+}
+
+legend {
+  font-size: 1rem;
+  width: auto;
+  font-weight: bold;
+  padding-inline-start: 5px;
+  padding-inline-end: 5px;
+}
+
+.input-error {
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 80%;
+  color: #dc3545;
+}

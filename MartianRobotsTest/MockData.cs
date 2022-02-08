@@ -37,8 +37,10 @@ namespace MartianRobotsTests
 
         public static Robot GetRobot()
         {
-            Robot robot = new Robot(3, 2, Orientation.North, GetGrid());
-            robot.Sequences = new List<Command>(GetCommandSequence());
+            Robot robot = new(3, 2, Orientation.North, GetGrid())
+            {
+                Sequences = new List<Command>(GetCommandSequence())
+            };
             return robot;
         }
 

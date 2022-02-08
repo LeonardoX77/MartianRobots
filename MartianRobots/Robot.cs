@@ -8,18 +8,18 @@ namespace MartianRobots
 {
     public class Robot
     {
-        public int PosX { get; private set; }
-        public int PosY { get; private set; }
+        public int PositionX { get; private set; }
+        public int PositionY { get; private set; }
         public Orientation Orientation { get; private set; }
         public bool IsLost { get; private set; }
         public List<Command>? Sequences { get; set; }
 
-        private Grid grid;
+        private readonly Grid grid;
 
         public Robot(int x, int y, Orientation orientation, Grid grid, List<Command>? sequences = null)
         {
-            PosX = x;
-            PosY = y;
+            PositionX = x;
+            PositionY = y;
             Orientation = orientation;
             this.grid = grid;
             Sequences = sequences;
@@ -50,16 +50,16 @@ namespace MartianRobots
 
             if (IsOutOfBounds(nextPosition.PositionX, nextPosition.PositionY))
             {
-                if (!grid.IsScented(PosX, PosY))
+                if (!grid.IsScented(PositionX, PositionY))
                 {
                     IsLost = true;
-                    grid.MarkPositionAsScented(PosX, PosY);
+                    grid.MarkPositionAsScented(PositionX, PositionY);
                 }
             }
             else
             {
-                PosX = nextPosition.PositionX;
-                PosY = nextPosition.PositionY;
+                PositionX = nextPosition.PositionX;
+                PositionY = nextPosition.PositionY;
             }
         }
 
@@ -81,7 +81,7 @@ namespace MartianRobots
 
         private Coordinate GetNextPosition()
         {
-            var nextPosition = new Coordinate(PosX, PosY);
+            var nextPosition = new Coordinate(PositionX, PositionY);
 
             if (Orientation == Orientation.North)
                 nextPosition.PositionY++;

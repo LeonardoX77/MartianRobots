@@ -1,0 +1,9 @@
+<div class="grid-cell" [ngClass]="{ 'is-lost': cell.robot?.isLost }">
+  <span *ngIf="cell.displayCellNumber">
+    {{ cell.cellIndex }} ({{ cell.x }}, {{ cell.y }})
+  </span>
+  &nbsp;
+
+  <app-robot *ngIf="cell.robot" [orientation]="cell.robot.orientation"></app-robot>
+  <!-- <app-robot [orientation]="robotOrientationEnum.West"></app-robot> -->
+</div>

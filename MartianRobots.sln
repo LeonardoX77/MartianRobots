@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartianRobots", "MartianRobots\MartianRobots.csproj", "{6560BD3F-FE16-485E-905A-3F75828BB462}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MartianRobots", "MartianRobots\MartianRobots.csproj", "{6560BD3F-FE16-485E-905A-3F75828BB462}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartialRobotsTest", "MartialRobotsTest\MartialRobotsTest.csproj", "{C8740909-CB0C-4CAA-8EB2-9FF974C2E8FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MartianRobotWebApi", "MartianRobotWebApi\MartianRobotWebApi.csproj", "{6F679A1D-C109-4799-8921-1F82FC41E19D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MartianRobotsTest", "MartianRobotsTest\MartianRobotsTest.csproj", "{4824BA76-6D77-4726-BAF5-0F4E2D071E7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +19,14 @@ Global
 		{6560BD3F-FE16-485E-905A-3F75828BB462}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6560BD3F-FE16-485E-905A-3F75828BB462}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6560BD3F-FE16-485E-905A-3F75828BB462}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C8740909-CB0C-4CAA-8EB2-9FF974C2E8FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8740909-CB0C-4CAA-8EB2-9FF974C2E8FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8740909-CB0C-4CAA-8EB2-9FF974C2E8FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8740909-CB0C-4CAA-8EB2-9FF974C2E8FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F679A1D-C109-4799-8921-1F82FC41E19D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F679A1D-C109-4799-8921-1F82FC41E19D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F679A1D-C109-4799-8921-1F82FC41E19D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F679A1D-C109-4799-8921-1F82FC41E19D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4824BA76-6D77-4726-BAF5-0F4E2D071E7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4824BA76-6D77-4726-BAF5-0F4E2D071E7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4824BA76-6D77-4726-BAF5-0F4E2D071E7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4824BA76-6D77-4726-BAF5-0F4E2D071E7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

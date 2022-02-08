@@ -1,4 +1,5 @@
-﻿using MartianRobots;
+﻿using MartialRobotsTest;
+using MartianRobots;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace MartianRobotsTests
         }
 
         [Test]
-        public void Test_GetRobotOutput()
+        public void GivenRobotListWhenInputIsProcessedThenExpectedRobotOutputIsReturned()
         {
             //arrange
             var input = $"5 3\r\n1 1 N\r\n\r\n3 2 E\r\n\r\n2 2 S\r\n\r\n3 3 W\r\n";
@@ -25,26 +26,11 @@ namespace MartianRobotsTests
             var robotReport = Output.GetRobotOutput(robots);
 
             //assert
-            Assert.AreEqual("1 1 N\r\n3 2 E\r\n2 2 S\r\n3 3 W\r\n", robotReport);
+            Assert.AreEqual("1 1 N\r\n3 2 E\r\n2 2 S\r\n3 3 W", string.Join(Environment.NewLine, robotReport));
         }
 
         [Test]
-        public void Test_GetRobotOutputWhenRobotIsLost()
-        {
-            //arrange
-            var robots = new List<Robot> { MockData.GetRobot() };
-            var commandStation = new CommandStation(robots);
-
-            //act
-            commandStation.ExecuteCommandSequence(0);
-            var robotReport = Output.GetRobotOutput(robots);
-
-            //assert
-            Assert.AreEqual("3 3 N LOST" + Environment.NewLine, robotReport);
-        }
-
-        [Test]
-        public void Test_InputGetRobotsExpectRightRobots()
+        public void GivenRobotListWhenInputIsProcessedThenSameRobotListIsReturned()
         {
             //arrange
             var grid = new Grid(5, 3);
@@ -70,7 +56,7 @@ namespace MartianRobotsTests
         }
 
         [Test]
-        public void Test_InputGetRobotsWithInvalidOrientationRaiseError()
+        public void GivenRobotListWithInvalidOrientationWhenInputIsProcessedThenRaisedErrorIsExpected()
         {
             //arrange
             var grid = new Grid(5, 3);
@@ -84,7 +70,7 @@ namespace MartianRobotsTests
         }
 
         [Test]
-        public void Test_InputGetRobotsCommandSequencesExpectRightCommandSequences()
+        public void GivenRobotListWithCommandSequencesWhenInputIsProcessedThenSameCommandSequencesAreReturned()
         {
             //arrange
             var grid = new Grid(5, 3);
@@ -111,7 +97,7 @@ namespace MartianRobotsTests
         }
 
         [Test]
-        public void Test_InputGetRobotsWithInvalidCommandSequenceRaiseError()
+        public void GivenRobotListWithInvalidCommandSequencesThenRaisedErrorIsExpected()
         {
             //arrange
             var invalidCommandSequence = "ABCDE";

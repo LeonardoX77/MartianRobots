@@ -8,19 +8,19 @@ namespace MartianRobots
 {
     public static class Output
     {
-        public static string GetRobotOutput(List<Robot> robots)
+        public static string[] GetRobotOutput(List<Robot> robots)
         {
-            var sb = new StringBuilder();
+            List<string> robotPositions = new();
 
             foreach(var robot in robots)
             {
-                var line = $"{robot.PosX} {robot.PosY} {GetOrientation(robot.Orientation)}";
+                var line = $"{robot.PositionX} {robot.PositionY} {GetOrientation(robot.Orientation)}";
                 if (robot.IsLost)
                     line += " LOST";
-                sb.AppendLine(line);
+                robotPositions.Add(line);
             }
 
-            return sb.ToString();
+            return robotPositions.ToArray();
         }
 
         private static char GetOrientation(Orientation orientation)

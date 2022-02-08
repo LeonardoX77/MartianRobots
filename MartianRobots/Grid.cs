@@ -10,7 +10,7 @@ namespace MartianRobots
     {
         public int XBound { get; }
         public int YBound { get;  }
-        private List<Coordinate> scentedCoords  = new List<Coordinate>();
+        private readonly List<Coordinate> scentedCoords  = new();
 
         public Grid(int x, int y)
         {

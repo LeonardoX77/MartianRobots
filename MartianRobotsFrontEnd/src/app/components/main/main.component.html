@@ -1,0 +1,30 @@
+<h1>Martial robots test</h1>
+
+<p>Please, fill the form with appropiate data and press OK</p>
+
+<app-robot-form
+  (onChange)="setGridData($event, true)"
+  (onSubmit)="setGridData($event, true, true)">
+</app-robot-form>
+
+<div *ngIf="error" class="error">An error has occurred. Please try again</div>
+<div *ngIf="loading">Retrieving data from server, please wait ...</div>
+
+<div *ngIf="finished" class="row">
+  <div class="col-12">
+    <label class="sub-title">Result:</label>
+    <ul *ngFor="let result of outputResult">
+      <li> {{ result }} </li>
+    </ul>
+  </div>
+</div>
+
+<app-grid #grid [data]="gridData"></app-grid>
+
+<div *ngIf="finished" class="row">
+  <div class="col-12">
+    <label class="sub-title">Finished!!</label>
+    <p>I hope you enjoyed it as much as I did when I developed it :)</p>
+    <div class="bender-enjoy"></div>
+  </div>
+</div>

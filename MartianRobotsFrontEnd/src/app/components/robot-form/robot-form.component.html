@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-12 col-md-6">
+    <form #frm="ngForm" (ngSubmit)="submit()" [formGroup]="robotForm.form">
+      <div class="form-content">
+        <fieldset class="form-group frame">
+          <legend> Form Data </legend>
+          <div class="row">
+            <div class="col">
+              <label for="xBound">Grid X bound</label>
+              <input type="text" class="form-control" [formControlName]="robotFormEnum.GridXBoundary">
+              <span class="input-error" *ngIf="frm.submitted && robotForm.form.get(robotFormEnum.GridXBoundary)?.hasError('required')">
+                Field is mandatoty
+              </span>
+              <span class="input-error" *ngIf="frm.submitted && robotForm.form.get(robotFormEnum.GridXBoundary)?.hasError('outOfRange')">
+                Field value is out of range. Valid range is 0-100
+              </span>
+            </div>
+            <div class="col">
+              <label for="yBound">Grid Y bound</label>
+              <input type="text" class="form-control" [formControlName]="robotFormEnum.GridYBoundary">
+              <span class="input-error" *ngIf="frm.submitted && robotForm.form.get(robotFormEnum.GridYBoundary)?.hasError('required')">
+                Field is mandatoty
+              </span>
+              <span class="input-error" *ngIf="frm.submitted && robotForm.form.get(robotFormEnum.GridYBoundary)?.hasError('outOfRange')">
+                Field value is out of range. Valid range is 0-100
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="yBound">Robot Positions (X, Y, Position (N, S, E, W))</label>
+              <input type="text" class="form-control" [formControlName]="robotFormEnum.Positions">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="yBound">Robot Instructions (L, R, F)</label>
+              <input type="text" class="form-control" maxlength="100" [formControlName]="robotFormEnum.Instructions">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col text-center">
+              <button type="button" class="btn btn-success" [disabled]="robotForm.form.invalid" (click)="addRobot()">Add Robot >></button>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="row">
+          <div class="col">
+            <button type="submit" [disabled]="robotForm.sequences.length === 0" class="btn btn-primary">Start!</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-12 col-md-6">
+    <fieldset *ngIf="robotForm.sequences.length > 0" class="form-group frame">
+      <legend> Summary </legend>
+
+      <ng-container *ngFor="let sequence of robotForm.sequences; let i = index">
+        <label>Robot {{i+1}} </label>
+        <ul>
+          <li> {{sequence.positions}} </li>
+          <li> {{sequence.instructions}} </li>
+        </ul>
+      </ng-container>
+    </fieldset>
+  </div>
+</div>

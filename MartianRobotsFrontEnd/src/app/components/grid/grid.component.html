@@ -1,0 +1,11 @@
+<!-- maybe a better grid implementation using css grid (but much more complex) -->
+<!-- https://itnext.io/angular-css-grid-dynamic-grid-properties-1a03634607a1 -->
+
+<div *ngIf="grid.length > 0" class="grid">
+  <div *ngFor="let row of grid" class="grid-row">
+    <ng-container *ngFor="let cell of row">
+      <!-- <app-robot [orientation]="robot.orientation"></app-robot> -->
+      <app-grid-cell [cell]="cell"></app-grid-cell>
+    </ng-container>
+  </div>
+</div>

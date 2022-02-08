@@ -8,8 +8,8 @@ namespace MartianRobots
 {
     public enum Command
     {
-        Forward,
-        Right,
-        Left
+        Forward = 0,
+        Right = 1,
+        Left = 2
     }
 }

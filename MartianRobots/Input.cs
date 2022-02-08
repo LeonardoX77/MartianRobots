@@ -12,10 +12,15 @@ namespace MartianRobots
         public static List<Robot> GetRobots(string input)
         {
             string[] lines = input.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-            var grid = ParseGrid(lines.First());
-            List<Robot> robots = new List<Robot>();
+            return GetRobots(lines);
+        }
 
-            for (int i = 1; i < lines.Count(); i++)
+        public static List<Robot> GetRobots(string[] lines)
+        {
+            var grid = ParseGrid(lines.First());
+            List<Robot> robots = new();
+
+            for (int i = 1; i < lines.Length; i++)
             {
                 Robot robot;
                 if (i % 2 == 0)
@@ -62,34 +67,25 @@ namespace MartianRobots
 
         private static Command GetCommand(char command)
         {
-            switch(command)
+            return command switch
             {
-                case 'F':
-                    return Command.Forward;
-                case 'R':
-                    return Command.Right;
-                case 'L':
-                    return Command.Left;
-                default:
-                    throw new ArgumentException($"char {command} not valid");
-            }
+                'F' => Command.Forward,
+                'R' => Command.Right,
+                'L' => Command.Left,
+                _ => throw new ArgumentException($"char {command} not valid"),
+            };
         }
 
         private static Orientation GetOrientation(string orientation)
         {
-            switch (orientation)
+            return orientation switch
             {
-                case "N":
-                    return Orientation.North;
-                case "E":
-                    return Orientation.East;
-                case "S":
-                    return Orientation.South;
-                case "W":
-                    return Orientation.West;
-                default:
-                    throw new ArgumentException($"Orientation {orientation} not valid");
-            }
+                "N" => Orientation.North,
+                "E" => Orientation.East,
+                "S" => Orientation.South,
+                "W" => Orientation.West,
+                _ => throw new ArgumentException($"Orientation {orientation} not valid"),
+            };
         }
     }
 }

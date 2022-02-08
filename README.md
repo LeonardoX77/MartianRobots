@@ -2,7 +2,7 @@
 
 This is my implementation for Martial robots DCSL Code Challenge
 
-# Running Backend
+# Backend (Asp .Net Core)
 
 Requirements:
 - The project requires [.NET Core 2.0](https://dotnet.microsoft.com/download/dotnet-core/2.0). 
@@ -27,14 +27,14 @@ docker run -it -p 7147:443 -e ASPNETCORE_Kestrel__Certificates__Default__Path=/a
 ## Code coverage
 Backend project includes also Coverlet and ReportGenerator libaries which can generate code coverage report for all tests. You can run and generate the report executing the script file 'execute-code-coverage-report.ps1' in a PowerShel (v.7) console
 
-# Runnig FrontEnd
+# FrontEnd (Angular latest)
 Requirements:
 - Node
 
 Run in console:
 ```
 npm install
-npm serve
+ng serve
 ```
 ## Docker
 Frontend project has a Dockerfile to run and deploy transpiled files into separated docker container.
